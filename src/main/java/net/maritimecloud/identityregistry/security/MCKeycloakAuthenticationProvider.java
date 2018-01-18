@@ -89,7 +89,7 @@ public class MCKeycloakAuthenticationProvider extends KeycloakAuthenticationProv
                 }
             }
         }
-        return new KeycloakAuthenticationToken(token.getAccount(), mapAuthorities(grantedAuthorities));
+        return new KeycloakAuthenticationToken(token.getAccount(), token.isInteractive(), mapAuthorities(grantedAuthorities));
     }
 
     private Collection<? extends GrantedAuthority> mapAuthorities(

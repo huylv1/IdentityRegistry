@@ -61,7 +61,7 @@ public class TokenGenerator {
         KeycloakPrincipal<RefreshableKeycloakSecurityContext> principal = new KeycloakPrincipal<>("name", ksc);
         SimpleKeycloakAccount account = new SimpleKeycloakAccount(principal, rolesSet, ksc);
         Collection<GrantedAuthority> authorities = generateGrantedAuthority(roles);
-        return new KeycloakAuthenticationToken(account, authorities);
+        return new KeycloakAuthenticationToken(account, false, authorities);
     }
 
     /**
@@ -81,7 +81,7 @@ public class TokenGenerator {
         essence.setO(orgMrn);
         essence.setCn(new String[] {"dmauser"});
         essence.setAuthorities(authorities);
-
+        // TODO: tests need to use something else than this as it is not compatible with newer versions of the keycloak adapter
         PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(essence.createUserDetails(), null, authorities);
         return token;
     }
